@@ -1,11 +1,4 @@
 class Thing {
-  /**
-   * @class
-   * @classdesc This will allow you to define things in a descriptive sentence like format.
-   *
-   * @param {string} name - The name of the thing.
-   * @throws {Error} - If name is not provided.
-   */
   constructor(name) {
     if (!name) {
       throw new Error('Name is required');
@@ -29,6 +22,19 @@ class Thing {
             return self;
           }
           self['is_a_' + prop] = true;
+          return self;
+        },
+      }
+    );
+  }
+
+  get is_not_a() {
+    const self = this;
+    return new Proxy(
+      {},
+      {
+        get(target, prop) {
+          self['is_a_' + prop] = false;
           return self;
         },
       }
