@@ -22,25 +22,19 @@ try {
   test.describe('john name is John').expect(john.name).toBe('John');
   test.describe('John is a man').expect(john.is_a_man);
 
-  jane.has(2).arms;
+  jane.has(2).hands.each((hand) => having(5).fingers);
 
+  test.describe('Jane has 2 hands').expect(jane.hands.length).toBe(2);
   test
-    .describe('Jane is Array')
-    .expect(jane.arms instanceof Array)
-    .toBe(true);
-  test.describe('Jane has 2 arms').expect(jane.arms.length).toBe(2);
+    .describe('Jane has 5 fingers on each hand')
+    .expect(jane.hands[0].fingers.length)
+    .toBe(5);
   test
-    .describe('Jane arms are things')
-    .expect(jane.arms[0] instanceof Thing)
-    .toBe(true);
-  test.describe('Jane arms name are arm').expect(jane.arms[0].name).toBe('arm');
+    .describe('Jane has 5 fingers on each hand')
+    .expect(jane.hands[1].fingers.length)
+    .toBe(5);
 
-  test
-    .describe('Jane is having 2 arms')
-    .expect(jane.having(2).arms.length)
-    .toBe(2);
-
-  test.end();
+  test.describe('Jane has 2 hands').expect(jane.hands.length).toBe(2);
 } catch (error) {
   console.log(error.message);
 }
