@@ -12,8 +12,19 @@ try {
   jane.is_a.woman;
   john.is_a_man;
 
-  john.has(1).head.having(2).eyes;
-
+  john
+    .has(1)
+    .head.having(2)
+    .eyes.each((eye) => being_the.color.green.and_the.shape.round);
+  console.log(john.head.eyes.color);
+  test
+    .describe('John has blue eyes')
+    .expect(john.head.eyes[0].color)
+    .toBe('green');
+  test
+    .describe('John has round eyes')
+    .expect(john.head.eyes[0].shape)
+    .toBe('round');
   test.describe('Jane is a man').expect(jane.is_a_man).toBe(false);
   test.describe('Jane is a woman').expect(jane.is_a_woman).toBe(true);
   test.describe('jane name is Jane').expect(jane.name).toBe('Jane');
@@ -41,6 +52,8 @@ try {
     .toBe('john');
 
   test.describe('Jane has 2 hands').expect(jane.hands.length).toBe(2);
+
+  test.end();
 } catch (error) {
   console.log(error.message);
 }
