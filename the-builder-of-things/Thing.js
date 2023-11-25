@@ -9,6 +9,8 @@ class Thing {
     this.is_a_person = false;
     this.is_a_man = false;
     this.is_a_woman = false;
+
+    this.track = null;
   }
 
   get is_a() {
@@ -102,6 +104,37 @@ class Thing {
         },
       }
     );
+  }
+
+  get can() {
+    return this;
+  }
+
+  speak(...args) {
+    const [arg1, arg2] = args;
+    let fn = arg1;
+    if (arg2) {
+      fn = arg2;
+      this.track = arg1;
+    }
+
+    if (typeof fn !== 'function') {
+      if (this.track) {
+        this[this.track] = [...this[this.track], this._speak(fn)];
+      }
+      return this._speak(fn);
+    }
+    let fnString = fn.toString();
+
+    fnString = fnString.replace(/\${name}/g, this.name);
+
+    this._speak = new Function('return ' + fnString)();
+
+    if (arg2) {
+      this[arg1] = [];
+    }
+
+    return this;
   }
 
   has(number) {

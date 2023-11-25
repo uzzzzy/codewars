@@ -53,6 +53,15 @@ try {
 
   test.describe('Jane has 2 hands').expect(jane.hands.length).toBe(2);
 
+  jane.can.speak('spoke', (phrases) => `${name} says: ${phrases}!`);
+
+  console.log(jane.speak('hello'));
+  jane.speak('hi');
+  console.log(jane.spoke);
+  // test
+  //   .describe('Jane can speak')
+  //   .expect(jane.speak('hello'))
+  //   .toBe('Jane says: hello!');
   test.end();
 } catch (error) {
   console.log(error.message);
