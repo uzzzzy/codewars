@@ -64,6 +64,26 @@ class Thing {
     );
   }
 
+  get being_the() {
+    const self = this;
+    return new Proxy(
+      {},
+      {
+        get(target, prop) {
+          return new Proxy(
+            {},
+            {
+              get(target, prop2) {
+                self[prop] = prop2;
+                return self;
+              },
+            }
+          );
+        },
+      }
+    );
+  }
+
   has(number) {
     const self = this;
     return new Proxy(
@@ -78,12 +98,14 @@ class Thing {
           }
           self[prop] = parts.length === 1 ? parts[0] : parts;
           self[prop].each = function (callback) {
-            this.forEach((hand) => {
-              const [_, number, prop] = callback
-                .toString()
-                .match(/having\((\d+)\)\.(.*)/);
-
-              hand.having(number)[prop];
+            this.forEach((thing) => {
+              const cbString = callback.toString().replace(/\s/g, '');
+              const [instance, fn] = cbString.split('=>');
+              const hasNumber = fn.match(/\((\d+)\)/);
+              const [method, value] = fn.split('.');
+              const [toRemove, number] = method.match(/\((\d+)\)/);
+              const method2 = method.replace(toRemove, '');
+              return thing[method2](number)[value];
             });
             return this;
           };
@@ -107,12 +129,11 @@ class Thing {
           }
           self[prop] = parts.length === 1 ? parts[0] : parts;
           self[prop].each = function (callback) {
-            this.forEach((hand) => {
-              const [_, number, prop] = callback
-                .toString()
-                .match(/having\((\d+)\)\.(.*)/);
-
-              hand.having(number)[prop];
+            this.forEach((thing) => {
+              const cbString = callback.toString().replace(/\s/g, '');
+              const [instance, fn] = cbString.split('=>');
+              const [method, prop1, prop2] = fn.split('.');
+              return thing[method][prop1][prop2];
             });
             return this;
           };
