@@ -10,11 +10,8 @@ class Thing {
     if (!name) {
       throw new Error('Name is required');
     }
+
     this.name = name;
-
-    this._is_a = null;
-
-    this.currentAction = null;
   }
 
   get is_a() {
