@@ -12,7 +12,8 @@ try {
   jane.is_a.woman;
   john.is_a_man;
 
-  test.describe('Jane is a person').expect(jane.is_a_person).toBe(true);
+  john.has(1).head.having(2).eyes;
+
   test.describe('Jane is a man').expect(jane.is_a_man).toBe(false);
   test.describe('Jane is a woman').expect(jane.is_a_woman).toBe(true);
   test.describe('jane name is Jane').expect(jane.name).toBe('Jane');
