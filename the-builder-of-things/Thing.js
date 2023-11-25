@@ -58,7 +58,7 @@ class Thing {
             parts.push(thing);
           }
           self[prop] = parts.length === 1 ? parts[0] : parts;
-          return self;
+          return self[prop];
         },
       }
     );
