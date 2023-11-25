@@ -16,9 +16,9 @@ try {
     .has(1)
     .head.having(2)
     .eyes.each((eye) => being_the.color.green.and_the.shape.round);
-  console.log(john.head.eyes.color);
+
   test
-    .describe('John has blue eyes')
+    .describe('John has green eyes')
     .expect(john.head.eyes[0].color)
     .toBe('green');
   test
