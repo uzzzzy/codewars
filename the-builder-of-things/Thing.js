@@ -45,6 +45,25 @@ class Thing {
     );
   }
 
+  get is_the() {
+    const self = this;
+    return new Proxy(
+      {},
+      {
+        get(target, prop) {
+          return new Proxy(
+            {},
+            {
+              get(target, prop2) {
+                return (self[prop] = prop2);
+              },
+            }
+          );
+        },
+      }
+    );
+  }
+
   has(number) {
     const self = this;
     return new Proxy(
