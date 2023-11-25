@@ -1,10 +1,5 @@
+const Thing = require('./Thing.js');
 const test = require('../Test.js');
-
-class Thing {
-  constructor(name) {
-    this.name = name;
-  }
-}
 
 const jane = new Thing('Jane');
 const john = new Thing('John');
