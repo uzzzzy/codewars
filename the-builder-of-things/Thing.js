@@ -64,6 +64,26 @@ class Thing {
     );
   }
 
+  get and_the() {
+    const self = this;
+    return new Proxy(
+      {},
+      {
+        get(target, prop) {
+          return new Proxy(
+            {},
+            {
+              get(target, prop2) {
+                self[prop] = prop2;
+                return self;
+              },
+            }
+          );
+        },
+      }
+    );
+  }
+
   get being_the() {
     const self = this;
     return new Proxy(
@@ -132,8 +152,17 @@ class Thing {
             this.forEach((thing) => {
               const cbString = callback.toString().replace(/\s/g, '');
               const [instance, fn] = cbString.split('=>');
-              const [method, prop1, prop2] = fn.split('.');
-              return thing[method][prop1][prop2];
+              const args = fn.split('.');
+
+              const chunks = [];
+              for (let i = 0; i < args.length; i += 3) {
+                chunks.push(args.slice(i, i + 3));
+              }
+              chunks.forEach((chunk) => {
+                thing[chunk[0]][chunk[1]][chunk[2]];
+              });
+
+              return thing;
             });
             return this;
           };
