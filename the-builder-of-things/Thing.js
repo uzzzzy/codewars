@@ -46,8 +46,20 @@ class Thing {
   }
 
   has(number) {
-    this.has_count = number;
-    return this;
+    const self = this;
+    return new Proxy(
+      {},
+      {
+        get(target, prop) {
+          const parts = [];
+          for (let i = 0; i < number; i++) {
+            parts.push(new Thing(prop));
+          }
+          self[prop] = parts;
+          return self;
+        },
+      }
+    );
   }
 }
 

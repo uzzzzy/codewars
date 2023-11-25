@@ -21,6 +21,14 @@ try {
   test.describe('john name is John').expect(john.name).toBe('John');
   test.describe('John is a man').expect(john.is_a_man);
 
+  jane.has(2).arms;
+
+  test.describe('Jane has 2 arms').expect(jane.arms.length).toBe(2);
+  test
+    .describe('Jane arms are things')
+    .expect(jane.arms[0] instanceof Thing)
+    .toBe(true);
+
   test.end();
 } catch (error) {
   console.log(error.message);
