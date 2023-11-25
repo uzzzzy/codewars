@@ -77,7 +77,7 @@ class Thing {
             parts.push(thing);
           }
           self[prop] = parts;
-          return self;
+          return parts;
         },
       }
     );

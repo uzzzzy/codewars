@@ -34,6 +34,11 @@ try {
     .toBe(true);
   test.describe('Jane arms name are arm').expect(jane.arms[0].name).toBe('arm');
 
+  test
+    .describe('Jane is having 2 arms')
+    .expect(jane.having(2).arms.length)
+    .toBe(2);
+
   test.end();
 } catch (error) {
   console.log(error.message);
