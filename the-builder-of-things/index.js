@@ -23,11 +23,16 @@ try {
 
   jane.has(2).arms;
 
+  test
+    .describe('Jane is Array')
+    .expect(jane.arms instanceof Array)
+    .toBe(true);
   test.describe('Jane has 2 arms').expect(jane.arms.length).toBe(2);
   test
     .describe('Jane arms are things')
     .expect(jane.arms[0] instanceof Thing)
     .toBe(true);
+  test.describe('Jane arms name are arm').expect(jane.arms[0].name).toBe('arm');
 
   test.end();
 } catch (error) {
