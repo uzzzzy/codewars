@@ -34,6 +34,12 @@ try {
     .expect(jane.hands[1].fingers.length)
     .toBe(5);
 
+  jane.is_the.parent_of.john;
+  test
+    .describe('Jane is the parent of John')
+    .expect(jane.parent_of)
+    .toBe('john');
+
   test.describe('Jane has 2 hands').expect(jane.hands.length).toBe(2);
 } catch (error) {
   console.log(error.message);
