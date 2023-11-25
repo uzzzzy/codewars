@@ -58,6 +58,16 @@ class Thing {
             parts.push(thing);
           }
           self[prop] = parts.length === 1 ? parts[0] : parts;
+          self[prop].each = function (callback) {
+            this.forEach((hand) => {
+              const [_, number, prop] = callback
+                .toString()
+                .match(/having\((\d+)\)\.(.*)/);
+
+              hand.having(number)[prop];
+            });
+            return this;
+          };
           return self[prop];
         },
       }
@@ -76,8 +86,8 @@ class Thing {
             const thing = new Thing(singular);
             parts.push(thing);
           }
-          self[prop] = parts;
-          return parts;
+          self[prop] = parts.length === 1 ? parts[0] : parts;
+          return self[prop];
         },
       }
     );
