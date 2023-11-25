@@ -1,6 +1,8 @@
 class Test {
   constructor() {
     this.description = '';
+
+    console.time('Test');
   }
 
   describe(description) {
@@ -31,6 +33,10 @@ class Test {
         self.description = '';
       },
     };
+  }
+
+  end() {
+    console.timeEnd('Test');
   }
 }
 
