@@ -57,7 +57,7 @@ class Thing {
             const thing = new Thing(singular);
             parts.push(thing);
           }
-          self[prop] = parts;
+          self[prop] = parts.length === 1 ? parts[0] : parts;
           return self;
         },
       }
