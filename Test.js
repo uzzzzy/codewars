@@ -18,6 +18,13 @@ class Test {
           success: '\x1b[32m',
           error: '\x1b[31m',
         };
+        if (actual !== expected) {
+          console.log(
+            `-${colors.description} ${self.description} =>${colors.error} ${actual} ✗ \x1b[0m`
+          );
+          self.description = '';
+          return;
+        }
         console.log(
           `-${colors.description} ${self.description} =>${colors.success} ${actual} ✓ \x1b[0m`
         );

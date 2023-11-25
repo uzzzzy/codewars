@@ -12,28 +12,30 @@ class Thing {
     }
     this.name = name;
 
-    // instance type
-    this._person = false;
-
     this._is_a = null;
 
     this.currentAction = null;
-
-    this._dynamicValues = {
-      person: false,
-    };
   }
 
   get is_a() {
-    this.currentAction = 'is_a';
-    return this;
-  }
-
-  get person() {
-    if (this.currentAction === 'is_a') {
-      this[this.currentAction + '_person'] = true;
-    }
-    return this;
+    const self = this;
+    const gender = ['man', 'woman'];
+    return new Proxy(
+      {},
+      {
+        get(target, prop) {
+          if (gender.includes(prop)) {
+            gender.forEach((item) => {
+              self['is_a_' + item] = false;
+            });
+            self['is_a_' + prop] = true;
+            return self;
+          }
+          self['is_a_' + prop] = true;
+          return self;
+        },
+      }
+    );
   }
 
   get is_a_() {
@@ -51,6 +53,7 @@ class Thing {
           }
         },
         set(target, prop, value) {
+          console.log('is_a_', prop, value);
           if (prop.startsWith('person')) {
             const dynamicProp = prop.slice('person'.length);
             self._dynamicValues[dynamicProp] = value;
