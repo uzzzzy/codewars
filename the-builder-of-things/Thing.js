@@ -53,7 +53,28 @@ class Thing {
         get(target, prop) {
           const parts = [];
           for (let i = 0; i < number; i++) {
-            parts.push(new Thing(prop));
+            const singular = prop.replace(/s$/, '');
+            const thing = new Thing(singular);
+            parts.push(thing);
+          }
+          self[prop] = parts;
+          return self;
+        },
+      }
+    );
+  }
+
+  having(number) {
+    const self = this;
+    return new Proxy(
+      {},
+      {
+        get(target, prop) {
+          const parts = [];
+          for (let i = 0; i < number; i++) {
+            const singular = prop.replace(/s$/, '');
+            const thing = new Thing(singular);
+            parts.push(thing);
           }
           self[prop] = parts;
           return self;
