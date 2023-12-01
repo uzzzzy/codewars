@@ -28,3 +28,10 @@ const testList = [
     expected: 1,
   },
 ];
+
+testList.forEach(({ test, expected }) => {
+  const result = calculate(test);
+  console.log('result', result);
+  console.log('expected', expected);
+  console.log('result === expected', result === expected);
+});
